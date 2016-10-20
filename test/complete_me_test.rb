@@ -1,11 +1,9 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/complete_me'
-require 'pry'
+require './lib/complete_me'
 
 class CompleteMeTest < Minitest::Test
-
   def test_can_create_a_complete_me_object
     completion = CompleteMe.new
     assert_equal CompleteMe, completion.class

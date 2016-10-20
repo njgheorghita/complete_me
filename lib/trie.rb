@@ -34,11 +34,19 @@ class Trie
   end
 
   def place(node_list, parent = @root_node)
-    return                                          if node_list.empty?
-    set_as_word(node_list, parent)                  if node_list.length == 1
+    if node_list.empty?
+      return nil
+    end
+    if node_list.length == 1
+      set_as_word(node_list, parent)
+    end
     node = node_list.shift
-    parent.add_child(node)                          if !child_exists?(node, parent)
-    place(node_list, parent.children[node.letter])  if child_exists?(node, parent)
+    if !child_exists?(node, parent)
+      parent.add_child(node)
+    end
+    if child_exists?(node, parent)
+      place(node_list, parent.children[node.letter])
+    end
   end
 
   def set_as_word(node_list, parent = @root_node)
@@ -60,8 +68,12 @@ class Trie
   end
 
   def browse_down_through_the_tree(node_list, parent = @root_node)
-    return nil if parent.nil?
-    return @node_storage_arr.last if node_list.empty?
+    if parent.nil? == true
+      return nil
+    end
+    if node_list.empty? == true
+      return @node_storage_arr.last
+    end
     node = node_list.shift
     @node_storage_arr << parent.children[node.letter]
     browse_down_through_the_tree(node_list, parent.children[node.letter])
@@ -114,9 +126,13 @@ class Trie
 
   def delete_across_the_trie(node_list)
     node = node_list.last
-    return if node == @root_node || !node.children.empty?
+    if node == @root_node || !node.children.empty?
+      return nil
+    end
     node = node_list.pop
-    (parent_finder(node, node_list)).children.delete(node.letter) if node.children.empty?
+    if node.children.empty?
+      (parent_finder(node, node_list)).children.delete(node.letter)
+    end
     delete_across_the_trie(node_list)
   end
 

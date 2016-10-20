@@ -1,8 +1,7 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/node'
-require 'pry'
+require './lib/node'
 
 class NodeTest < Minitest::Test
   def test_can_create_a_node_object

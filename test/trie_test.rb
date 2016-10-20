@@ -1,12 +1,9 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/trie'
-
-require 'pry'
+require './lib/trie'
 
 class TrieTest < Minitest::Test
-
   def test_can_create_a_trie_object
     trie = Trie.new
     assert_equal Trie, trie.class
